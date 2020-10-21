@@ -2,19 +2,30 @@ package com.ancsin.spring.dictionary.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "user")
 public class User extends AbstractEntity {
 
 //	@Id
 //	private String userId;
+	@Column(name = "first_name")
 	private String firstName;
+	@Column(name = "last_name")
 	private String lastName;
+	@Column(name = "birth_date")
 	private LocalDate birthDate;
+	@Column(name = "email")
 	private String email;
 
 	public User() {
 	}
 
 	public User(String firstName, String lastName, LocalDate birthDate, String email) {
+		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthDate = birthDate;
