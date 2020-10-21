@@ -10,5 +10,5 @@ public class Word extends AbstractEntity {
 	
 	// level	
 	
-	// list - 1 German word has multiple meanings
+	// a word has multiple meanings ---> kapcsolotabla kell
 }
