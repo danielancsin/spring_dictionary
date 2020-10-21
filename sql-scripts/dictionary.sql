@@ -1,4 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `dictionary`;
+#default collate - utf8mb4
+
 USE `dictionary`;
 
 DROP TABLE IF EXISTS `user`;
@@ -17,7 +19,6 @@ CREATE TABLE `user` (
 --
 -- Data for table `employee`
 --
-
 INSERT INTO `user` VALUES 
 	(1,'Leslie','Andrews','leslie@ancsin.com', '1979-12-15', now(), null),
 	(2,'Emma','Baumgarten','emma@ancsin.com','1983-03-12', now(), null),
