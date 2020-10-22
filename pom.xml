@@ -60,6 +60,12 @@
 <!-- 			<artifactId>spring-security-config</artifactId> -->
 <!-- 		</dependency> -->
 
+		<dependency> 
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.0.21.Final</version>
+		</dependency> 
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
