@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "user")
-public class User extends AbstractEntity {
+public class User extends AuditEntity {
 
 //	@Id
 //	private String userId;

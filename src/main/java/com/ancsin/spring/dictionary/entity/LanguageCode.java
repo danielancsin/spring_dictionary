@@ -1,6 +1,7 @@
 package com.ancsin.spring.dictionary.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -9,8 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 // ISO 639-2
 // https://datahub.io/core/language-codes
 @Entity
+@Table(name = "language_code")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class LanguageCode extends AbstractEntity 
+public class LanguageCode extends AuditEntity 
 /*extends CodeEntity*/ {
 
 	@NotNull

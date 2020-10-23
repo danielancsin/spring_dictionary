@@ -5,9 +5,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 @Entity
-public class GenderGerman extends AbstractEntity {
+public class GenderGerman extends AuditEntity {
 
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(EnumType.STRING)
 	private EnumGenderGerman gender;
 
 	public GenderGerman() {

@@ -1,6 +1,11 @@
 package com.ancsin.spring.dictionary.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 // Lazy init
+@Entity
 public enum EnumGenderGerman {
 	
 	DER(1,"der"),
@@ -8,7 +13,9 @@ public enum EnumGenderGerman {
 	DAS(3,"das");
 	// TODO : is "DIE" plural needed???
 
+	@Id
 	private final long id;
+	@Column
 	private final String name;
 	
 	private EnumGenderGerman(long id, String name) {
@@ -23,5 +30,6 @@ public enum EnumGenderGerman {
 	public String getName() {
 		return name;
 	}
+	
 	
 }

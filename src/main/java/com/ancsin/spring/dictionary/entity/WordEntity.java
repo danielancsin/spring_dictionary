@@ -20,6 +20,9 @@ public abstract class WordEntity extends AbstractEntity {
 	
 	//Level of Knowledge. E.g.: A1, B2, C1...
 //	private String level;
+	// NotesEntity, contains:
+	//		Text - notes 
+	//		boolean isPublic - whether or not it is public
 
 	public WordEntity() {
 		super();
