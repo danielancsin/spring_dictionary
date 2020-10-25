@@ -1,9 +1,11 @@
-package com.ancsin.spring.dictionary.entity;
+package com.ancsin.spring.dictionary.entity.abstracts;
 
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+
+import com.ancsin.spring.dictionary.entity.LanguageCode;
 
 public abstract class WordEntity extends AbstractEntity {
 

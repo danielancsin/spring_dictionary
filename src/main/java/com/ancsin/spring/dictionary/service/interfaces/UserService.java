@@ -1,4 +1,4 @@
-package com.ancsin.spring.dictionary.service;
+package com.ancsin.spring.dictionary.service.interfaces;
 
 import com.ancsin.spring.dictionary.entity.User;
 

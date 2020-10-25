@@ -1,4 +1,4 @@
-package com.ancsin.spring.dictionary.entity;
+package com.ancsin.spring.dictionary.entity.abstracts;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;

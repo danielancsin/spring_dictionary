@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ancsin.spring.dictionary.dao.UserRepository;
 import com.ancsin.spring.dictionary.entity.User;
+import com.ancsin.spring.dictionary.service.interfaces.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {

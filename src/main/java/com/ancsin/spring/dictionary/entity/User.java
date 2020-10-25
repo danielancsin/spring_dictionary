@@ -5,14 +5,21 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import com.ancsin.spring.dictionary.entity.abstracts.AuditEntity;
+
 @Entity
-@Table(name = "user")
+@Table(	name = "user",
+		uniqueConstraints = @UniqueConstraint(columnNames = {"username", "email"}))
 public class User extends AuditEntity {
 
 //	@Id
 //	private String userId;
+	@NotNull
+	@Column(name = "username")
+	private String username;
 	@NotNull
 	@Column(name = "first_name")
 	private String firstName;
@@ -28,12 +35,21 @@ public class User extends AuditEntity {
 	public User() {
 	}
 
-	public User(String firstName, String lastName, LocalDate birthDate, String email) {
+	public User(String username, String firstName, String lastName, LocalDate birthDate, String email) {
 		super();
+		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthDate = birthDate;
 		this.email = email;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getFirstName() {
@@ -70,8 +86,8 @@ public class User extends AuditEntity {
 
 	@Override
 	public String toString() {
-		return "User [firstName=" + firstName + ", lastName=" + lastName + ", birthDate=" + birthDate + ", email="
-				+ email + ", super.toString()=" + super.toString() + "]";
+		return "User [username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", birthDate="
+				+ birthDate + ", email=" + email + ", super.toString()=" + super.toString() + "]";
 	}
 	
 }

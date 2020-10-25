@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ancsin.spring.dictionary.entity.User;
-import com.ancsin.spring.dictionary.service.UserService;
+import com.ancsin.spring.dictionary.service.interfaces.UserService;
 
 @Controller
 @RequestMapping("/users")
@@ -85,7 +85,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/search")
-	public String delete(@RequestParam("userName") String name, Model model) {
+	public String search(@RequestParam("userName") String name, Model model) {
 		
 		// delete the User
 		List<User> users = userService.searchBy(name);

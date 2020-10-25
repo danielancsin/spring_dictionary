@@ -3,6 +3,7 @@ package com.ancsin.spring.dictionary.service;
 import java.util.List;
 
 import com.ancsin.spring.dictionary.entity.LanguageCode;
+import com.ancsin.spring.dictionary.service.interfaces.LanguageCodeService;
 
 public class LanguageCodeServiceImpl implements LanguageCodeService {
 

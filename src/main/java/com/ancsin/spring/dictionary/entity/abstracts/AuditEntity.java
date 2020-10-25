@@ -1,8 +1,10 @@
-package com.ancsin.spring.dictionary.entity;
+package com.ancsin.spring.dictionary.entity.abstracts;
 
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+
+import com.ancsin.spring.dictionary.entity.User;
 
 public abstract class AuditEntity extends AbstractEntity {
 
