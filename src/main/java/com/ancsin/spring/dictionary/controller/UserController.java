@@ -23,9 +23,7 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	// add mapping for "/list"
-
-	@GetMapping("/list")
+	@GetMapping("/")
 	public String listUsers(Model model) {
 		
 		// get Users from db
@@ -34,7 +32,8 @@ public class UserController {
 		// add to the spring model
 		model.addAttribute("users", users);
 		
-		return "/users/list-users";
+//		return "/users/list-users";
+		return "/users";
 	}
 	
 	@GetMapping("/showFormForAdd")
@@ -45,7 +44,7 @@ public class UserController {
 		
 		model.addAttribute("user", user);
 		
-		return "/users/user-form";
+		return "/user-form";
 	}
 
 	@GetMapping("/showFormForUpdate")
@@ -58,7 +57,7 @@ public class UserController {
 		model.addAttribute("user", user);
 		
 		// send over to our form
-		return "/users/user-form";			
+		return "/user-form";			
 	}
 	
 	
@@ -69,7 +68,7 @@ public class UserController {
 		userService.save(theUser);
 		
 		// use a redirect to prevent duplicate submissions
-		return "redirect:/users/list";
+		return "redirect:/users";
 	}
 	
 	
@@ -80,7 +79,7 @@ public class UserController {
 		userService.deleteById(id);
 		
 		// redirect to /Users/list
-		return "redirect:/users/list";
+		return "redirect:/users";
 		
 	}
 	
@@ -94,7 +93,7 @@ public class UserController {
 		model.addAttribute("users", users);
 		
 		// send to /Users/list
-		return "/users/list-users";
+		return "/users";
 		
 	}
 }

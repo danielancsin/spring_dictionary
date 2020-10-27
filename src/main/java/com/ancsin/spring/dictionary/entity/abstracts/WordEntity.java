@@ -2,12 +2,14 @@ package com.ancsin.spring.dictionary.entity.abstracts;
 
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import com.ancsin.spring.dictionary.entity.LanguageCode;
 
-public abstract class WordEntity extends AbstractEntity {
+@MappedSuperclass
+public abstract class WordEntity extends AuditEntity {
 
 	@NotNull
 	private String word;
@@ -17,7 +19,7 @@ public abstract class WordEntity extends AbstractEntity {
 	@JoinColumn(name = "language_code_id")
 	private LanguageCode languageCode;
 	
-	@Column(name = "is_approved")
+	@Column(name = "is_approved", columnDefinition = "boolean default false")
 	private boolean isApproved;
 	
 	//Level of Knowledge. E.g.: A1, B2, C1...

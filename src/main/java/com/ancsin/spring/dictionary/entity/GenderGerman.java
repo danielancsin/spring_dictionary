@@ -14,7 +14,7 @@ import javax.persistence.ManyToMany;
 
 import com.ancsin.spring.dictionary.entity.abstracts.AuditEntity;
 
-@Entity
+//@Entity
 public class GenderGerman extends AuditEntity {
 
 	@Enumerated(EnumType.STRING)

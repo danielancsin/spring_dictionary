@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(title, content)">
+<head>
+    <meta charset="UTF-8">
+    <title th:replace="${title}">Layout Title</title>
+</head>
+<body>
+
+    <h1>Layout Main Heading</h1>
+
+    <section th:replace="${content}">
+        <p>Layout contents</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2020 Layout footer</p>
+    </footer>
+
+</body>
+</html>

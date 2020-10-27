@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<title>Users</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+
+		<section class="my-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+
+						<h3>Nouns</h3>
+						<hr>
+
+						<form th:action="@{/nouns/search}" class="form-inline">
+							<a th:href="@{/nouns/showFormForAdd}"
+								class="btn btn-primary btn-sm mr-5 mb-3"> Add Noun </a> <input
+								class="form-control  ml-5 mr-sm-2 mb-3" type="search"
+								name="word" placeholder="Search by word" />
+
+							<button class="btn btn-success mb-3" type="submit">Search</button>
+						</form>
+
+
+						<table class="table table-bordered table-striped">
+							<thead class="thead-dark">
+								<tr>
+									<th>Gender</th>
+									<th>Noun</th>
+									<th>Plural</th>
+									<th>Meaning</th>
+									<th>Edit</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr th:each="temp : ${nouns}">
+
+									<td th:text="${temp.word}" />
+									<td th:text="${temp.word}" />
+									<td th:text="${temp.plural}" />
+									<td th:text="${temp.plural}" />
+
+									<td>
+										<!-- 					<div sec:authorize="hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')"> -->
+
+										<!-- Add "update" button/link --> <a
+										th:href="@{/nouns/showFormForUpdate(nounId=${temp.id})}"
+										class="btn btn-info btn-sm"> Update </a> <!-- 					</div>					 -->
+
+										<!-- 					<div sec:authorize="hasRole('ROLE_ADMIN')">   --> <!-- Add "delete" button/link -->
+										<a th:href="@{/nouns/delete(nounId=${temp.id})}"
+										class="btn btn-danger btn-sm"
+										onclick="if (!(confirm('Are you sure you want to delete this word?'))) return false">
+											Delete </a> <!-- 					</div>					 -->
+									</td>
+
+
+								</tr>
+							</tbody>
+						</table>
+
+						<hr>
+						<a th:href="@{/}">Home</a>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+</body>
+</html>

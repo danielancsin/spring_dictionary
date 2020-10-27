@@ -3,25 +3,25 @@ package com.ancsin.spring.dictionary.entity.abstracts;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 
-import com.ancsin.spring.dictionary.entity.User;
-
+@MappedSuperclass
 public abstract class AuditEntity extends AbstractEntity {
 
 
-	@Column(name = "datetime_created")
+	@Column(name = "created_datetime")
 	private LocalDateTime dateCreated = LocalDateTime.now();
-	@Column(name = "datetime_modified")
+	@Column(name = "modified_datetime")
 	private LocalDateTime dateModified;
-	@Column(name = "user_created_by")
-	private User userCreatedBy;
-	@Column(name = "user_modified_by")
-	private User userModifiedBy;
+	@Column(name = "created_by")
+	private String userCreatedBy;
+	@Column(name = "modified_by")
+	private String userModifiedBy;
 	
 	public AuditEntity() {
 	}
 	
-	public AuditEntity(LocalDateTime dateCreated, LocalDateTime dateModified, User userCreatedBy, User userModifiedBy) {
+	public AuditEntity(LocalDateTime dateCreated, LocalDateTime dateModified, String userCreatedBy, String userModifiedBy) {
 		super();
 		this.dateCreated = dateCreated;
 		this.dateModified = dateModified;
@@ -43,6 +43,22 @@ public abstract class AuditEntity extends AbstractEntity {
 
 	public void setDateModified(LocalDateTime dateModified) {
 		this.dateModified = dateModified;
+	}
+	
+	public String getUserCreatedBy() {
+		return userCreatedBy;
+	}
+
+	public void setUserCreatedBy(String userCreatedBy) {
+		this.userCreatedBy = userCreatedBy;
+	}
+
+	public String getUserModifiedBy() {
+		return userModifiedBy;
+	}
+
+	public void setUserModifiedBy(String userModifiedBy) {
+		this.userModifiedBy = userModifiedBy;
 	}
 
 	@Override

@@ -11,7 +11,6 @@ public enum EnumGenderGerman {
 	DER(1,"der"),
 	DIE(2,"die"),
 	DAS(3,"das");
-	// TODO : is "DIE" plural needed???
 
 	@Id
 	private final long id;
@@ -30,6 +29,5 @@ public enum EnumGenderGerman {
 	public String getName() {
 		return name;
 	}
-	
 	
 }

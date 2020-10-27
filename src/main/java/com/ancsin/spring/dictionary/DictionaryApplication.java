@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.ancsin.spring.dictionary.config.EntityInitializer;
 
-@SpringBootApplication//(scanBasePackages = { "com.ancsin.spring.dictionary.entity" })
+@SpringBootApplication
 public class DictionaryApplication {
 
 	public static void main(String[] args) {

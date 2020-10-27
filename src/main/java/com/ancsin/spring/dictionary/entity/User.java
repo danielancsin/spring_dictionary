@@ -17,6 +17,8 @@ public class User extends AuditEntity {
 
 //	@Id
 //	private String userId;
+	// TODO : make username and email unique
+	// TODD : password reminder and/other reset
 	@NotNull
 	@Column(name = "username")
 	private String username;

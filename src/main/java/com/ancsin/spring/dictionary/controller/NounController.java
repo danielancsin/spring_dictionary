@@ -23,9 +23,7 @@ public class NounController {
 		this.nounService = nounService;
 	}
 	
-	// add mapping for "/list"
-
-	@GetMapping("/list")
+	@GetMapping("/")
 	public String listNouns(Model model) {
 		
 		// get Nouns from db
@@ -34,7 +32,8 @@ public class NounController {
 		// add to the spring model
 		model.addAttribute("nouns", nouns);
 		
-		return "/nouns/list-nouns";
+//		return "/nouns/list-nouns";
+		return "/nouns";
 	}
 	
 	@GetMapping("/showFormForAdd")
@@ -45,7 +44,7 @@ public class NounController {
 		
 		model.addAttribute("noun", noun);
 		
-		return "/nouns/noun-form";
+		return "/noun-form";
 	}
 
 	@GetMapping("/showFormForUpdate")
@@ -58,7 +57,7 @@ public class NounController {
 		model.addAttribute("noun", noun);
 		
 		// send over to our form
-		return "/nouns/noun-form";			
+		return "/noun-form";			
 	}
 	
 	
@@ -69,7 +68,7 @@ public class NounController {
 		nounService.save(theNoun);
 		
 		// use a redirect to prevent duplicate submissions
-		return "redirect:/nouns/list";
+		return "redirect:/nouns";
 	}
 	
 	
@@ -80,7 +79,7 @@ public class NounController {
 		nounService.deleteById(id);
 		
 		// redirect to /Nouns/list
-		return "redirect:/nouns/list";
+		return "redirect:/nouns";
 		
 	}
 	
@@ -94,7 +93,8 @@ public class NounController {
 		model.addAttribute("nouns", nouns);
 		
 		// send to /Nouns/list
-		return "/nouns/list-nouns";
+//		return "/nouns/list-nouns";
+		return "/nouns";
 		
 	}
 }
