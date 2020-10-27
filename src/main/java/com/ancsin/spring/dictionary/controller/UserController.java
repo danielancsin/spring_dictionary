@@ -23,7 +23,7 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	@GetMapping("/")
+	@GetMapping({"","/"})
 	public String listUsers(Model model) {
 		
 		// get Users from db
@@ -32,7 +32,6 @@ public class UserController {
 		// add to the spring model
 		model.addAttribute("users", users);
 		
-//		return "/users/list-users";
 		return "/users";
 	}
 	
@@ -78,9 +77,7 @@ public class UserController {
 		// delete the User
 		userService.deleteById(id);
 		
-		// redirect to /Users/list
 		return "redirect:/users";
-		
 	}
 	
 	@GetMapping("/search")
@@ -92,8 +89,6 @@ public class UserController {
 		// add to the spring model
 		model.addAttribute("users", users);
 		
-		// send to /Users/list
 		return "/users";
-		
 	}
 }

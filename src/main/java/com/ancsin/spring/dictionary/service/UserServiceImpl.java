@@ -20,6 +20,7 @@ public class UserServiceImpl implements UserService {
 		this.userRepository = userRepository;
 	}
 
+	// TODO : user settings based pagination
 	@Override
 	public List<User> findAll() {
 		return userRepository.findAll();

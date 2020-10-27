@@ -23,18 +23,23 @@ public class NounController {
 		this.nounService = nounService;
 	}
 	
-	@GetMapping("/")
-	public String listNouns(Model model) {
+	// TODO : pagination, BUT huge performance impact on small (500k words) table. Optimze query, etc...
+	// TODO : user settings pased pagination
+//	@GetMapping("/{pageNo}/{pageSize}")
+	@GetMapping({"","/"})
+    public String listNounsPaginated(
+//    		@PathVariable(required = false) int pageNo, 
+//            @PathVariable(required = false) int pageSize,
+    		@RequestParam(required = false, defaultValue = "0") int pageNo,
+    		@RequestParam(required = false, defaultValue = "20") int pageSize,
+            Model model
+            ) {
+		List<Noun> nouns = nounService.findAllPaginated(pageNo, pageSize);
 		
-		// get Nouns from db
-		List<Noun> nouns = nounService.findAll();
-		
-		// add to the spring model
 		model.addAttribute("nouns", nouns);
 		
-//		return "/nouns/list-nouns";
-		return "/nouns";
-	}
+        return "/nouns";
+    }
 	
 	@GetMapping("/showFormForAdd")
 	public String showFormForAdd(Model model) {
@@ -56,7 +61,7 @@ public class NounController {
 		// set Noun as a model attribute to pre-populate the form
 		model.addAttribute("noun", noun);
 		
-		// send over to our form
+		// send over to form
 		return "/noun-form";			
 	}
 	
@@ -78,23 +83,22 @@ public class NounController {
 		// delete the Noun
 		nounService.deleteById(id);
 		
-		// redirect to /Nouns/list
 		return "redirect:/nouns";
-		
 	}
 	
 	@GetMapping("/search")
-	public String search(@RequestParam("nounName") String name, Model model) {
+	public String search(@RequestParam("word") String word, Model model) {
 		
-		// delete the Noun
-		List<Noun> nouns = nounService.searchBy(name);
+		List<Noun> nouns = null;
+
+		if (word.strip().isEmpty())
+			nouns = nounService.findAll();
+		else
+			nouns = nounService.searchBy(word);
 		
 		// add to the spring model
 		model.addAttribute("nouns", nouns);
 		
-		// send to /Nouns/list
-//		return "/nouns/list-nouns";
 		return "/nouns";
-		
 	}
 }

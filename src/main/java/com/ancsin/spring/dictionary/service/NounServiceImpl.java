@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.ancsin.spring.dictionary.dao.NounRepository;
@@ -19,6 +22,15 @@ public class NounServiceImpl implements NounService {
 	@Override
 	public List<Noun> findAll() {
 		return nounRepository.findAll();
+	}
+	
+	@Override
+	public List<Noun> findAllPaginated(int page, int size) {
+		
+		Pageable paging = PageRequest.of(page, size);
+		Page<Noun> pagedResults = nounRepository.findAll(paging);
+		
+		return pagedResults.toList();
 	}
 
 	@Override
@@ -47,22 +59,16 @@ public class NounServiceImpl implements NounService {
 	}
 
 	@Override
-	public List<Noun> searchBy(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Noun> searchBy(String word) {
+		
+		List<Noun> results = null;
+		
+		if(word != null && (word.trim().length() > 0) )
+			results = nounRepository.findByWordContainsAllIgnoreCase(word);
+		else
+			results = findAll();
+		
+		return results;
 	}
-
-//	@Override
-//	public List<Noun> searchBy(String word) {
-//		
-//		List<Noun> results = null;
-//		
-//		if(word != null && (word.trim().length() > 0) )
-//			results = nounRepository.findByWordContainsAllIgnoreCase(word);
-//		else
-//			results = findAll();
-//		
-//		return results;
-//	}
 
 }

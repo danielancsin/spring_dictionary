@@ -9,7 +9,7 @@ import com.ancsin.spring.dictionary.entity.Noun;
 public interface NounRepository extends JpaRepository<Noun, Long> {
 
 	// TODO : add methods to queries
+	public List<Noun> findByWordContainsAllIgnoreCase(String word);
 	
-//	public List<Noun> findByWordContainsAllIgnoreCase(String word);
 	
 }
