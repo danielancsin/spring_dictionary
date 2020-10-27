@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -14,7 +15,7 @@ import javax.persistence.Table;
 import com.ancsin.spring.dictionary.entity.abstracts.WordEntity;
 
 @Entity
-@Table(	name = "noun"
+@Table(	name = "noun", indexes = @Index(name = "ix_word", columnList = "word")
 		/*,uniqueConstraints = @UniqueConstraint(columnNames = {"username", "email"})*/)
 public class Noun extends WordEntity {
 
