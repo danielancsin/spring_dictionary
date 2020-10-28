@@ -1,7 +1,9 @@
 package com.ancsin.spring.dictionary.controller;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,11 @@ import com.ancsin.spring.dictionary.service.interfaces.NounService;
 @Controller
 @RequestMapping("/nouns")
 public class NounController {
+	
+	// TODO : user settings pased pagination
+	public static final int DEFAULT_PAGE = 0;
+	public static final int DEFAULT_PAGE_SIZE = 20;
+	public static final int DEFAULT_PAGINATION = 6;
 
 	private NounService nounService;
 
@@ -24,19 +31,29 @@ public class NounController {
 	}
 	
 	// TODO : pagination, BUT huge performance impact on small (500k words) table. Optimze query, etc...
-	// TODO : user settings pased pagination
-//	@GetMapping("/{pageNo}/{pageSize}")
-	@GetMapping({"","/"})
+	@GetMapping({"","/", "/search"})
     public String listNounsPaginated(
-//    		@PathVariable(required = false) int pageNo, 
-//            @PathVariable(required = false) int pageSize,
-    		@RequestParam(required = false, defaultValue = "0") int pageNo,
-    		@RequestParam(required = false, defaultValue = "20") int pageSize,
-            Model model
+    		@PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE) Pageable pageable,
+    		@RequestParam(required = false) String word,
+    		Model model
             ) {
-		List<Noun> nouns = nounService.findAllPaginated(pageNo, pageSize);
 		
-		model.addAttribute("nouns", nouns);
+		Page<Noun> nounPage = null;
+		
+		if (word == null || word.strip().isEmpty())
+			nounPage = nounService.findAllPaginated(pageable);
+		else
+			nounPage = nounService.findByWordContainsAllIgnoreCase(word, pageable);
+		
+		int current = nounPage.getNumber() + DEFAULT_PAGINATION / 2;
+	    int begin = Math.max(0, current - DEFAULT_PAGINATION);
+	    int end = Math.min(begin + DEFAULT_PAGINATION, nounPage.getTotalPages());
+		
+		model.addAttribute("nounPage", nounPage);
+		model.addAttribute("current", current);
+		model.addAttribute("begin", begin);
+		model.addAttribute("end", end);
+		model.addAttribute("searchedWord", word);
 		
         return "/nouns";
     }
@@ -67,10 +84,10 @@ public class NounController {
 	
 	
 	@PostMapping("/save")
-	public String saveNoun(@ModelAttribute("noun") Noun theNoun) {
+	public String saveNoun(@ModelAttribute("noun") Noun noun) {
 		
 		// save the Noun
-		nounService.save(theNoun);
+		nounService.save(noun);
 		
 		// use a redirect to prevent duplicate submissions
 		return "redirect:/nouns";
@@ -86,19 +103,13 @@ public class NounController {
 		return "redirect:/nouns";
 	}
 	
-	@GetMapping("/search")
-	public String search(@RequestParam("word") String word, Model model) {
-		
-		List<Noun> nouns = null;
-
-		if (word.strip().isEmpty())
-			nouns = nounService.findAll();
-		else
-			nouns = nounService.searchBy(word);
-		
-		// add to the spring model
-		model.addAttribute("nouns", nouns);
-		
-		return "/nouns";
-	}
+    private PageRequest toPageRequest(Integer page, Integer size) {
+        if (page == null) {
+            page = Integer.valueOf(DEFAULT_PAGE);
+        }
+        if (size == null) {
+            size = Integer.valueOf(DEFAULT_PAGE_SIZE);
+        }
+        return PageRequest.of(page, size);
+    }
 }

@@ -25,6 +25,33 @@ public class NounServiceImpl implements NounService {
 	}
 	
 	@Override
+	public Page<Noun> findAllPaginated(Pageable pageable) {
+		
+//		int pageNo = pageable.getPageNumber();
+//		int pageSize = pageable.getPageSize();
+//		int startItem = pageNo * pageSize;
+//		
+//		List<Noun> list;
+//		List<Noun> nouns = nounRepository.findAll();///pageable).toList();
+//		
+//		if (nouns.size() < startItem) {
+//			list = Collections.emptyList();
+//		}
+//		else {
+//			int toIndex = Math.min(startItem + pageSize, nouns.size());
+//			list = nouns.subList(startItem, toIndex);
+//		}
+//		Page<Noun> nounPage = new PageImpl<Noun>(list, PageRequest.of(pageNo, pageSize), nouns.size());
+		
+		return nounRepository.findAll(pageable);
+	}
+	
+	@Override
+	public Page<Noun> findByWordContainsAllIgnoreCase(String word, Pageable pageable) {
+		return nounRepository.findByWordContainsAllIgnoreCase(word, pageable);
+	}
+	
+	@Override
 	public List<Noun> findAllPaginated(int page, int size) {
 		
 		Pageable paging = PageRequest.of(page, size);

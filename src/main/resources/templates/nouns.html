@@ -18,7 +18,7 @@
 						<h3>Nouns</h3>
 						<hr>
 
-						<form th:action="@{/nouns/search}" class="form-inline">
+						<form th:action="@{/nouns}" class="form-inline">
 							<a th:href="@{/nouns/showFormForAdd}"
 								class="btn btn-primary btn-sm mr-5 mb-3"> Add Noun </a> <input
 								class="form-control  ml-5 mr-sm-2 mb-3" type="search"
@@ -40,7 +40,7 @@
 							</thead>
 
 							<tbody>
-								<tr th:each="temp : ${nouns}">
+								<tr th:each="temp, iStat : ${nounPage.content}">
 
 									<td th:text="${temp.word}" />
 									<td th:text="${temp.word}" />
@@ -65,6 +65,33 @@
 								</tr>
 							</tbody>
 						</table>
+						
+						<nav aria-label="Pages">
+						    <ul class="pagination justify-content-center">
+						
+							<li th:class="${nounPage.number eq 0} ? 'page-item disabled' : 'page-item'">
+					            <a class="page-link" th:if="${nounPage.number - 1 ge 0}" th:href="@{${'/nouns'}(page=${0},size=${nounPage.size},word=${searchedWord})}" th:text="First"></a>
+					            <a class="page-link" th:if="${not (nounPage.number - 1 ge 0)}" href="javascript:void(0);" th:text="First"></a>
+					        </li>
+						
+						        <li class="page-item" th:each="pageNo : ${#numbers.sequence(begin, end-1)}" >
+						            <a class="page-link active" aria-current="page"
+						            	th:classappend="${nounPage.number eq pageNo} ? 'disabled'"
+						            	th:if="${nounPage.number eq pageNo}" href="javascript:void(0);"
+						                th:text="${pageNo + 1}">
+						                <span class="sr-only">(current)</span>
+						            </a>
+						            <a class="page-link" th:if="${not (nounPage.number eq pageNo)}" th:href="@{${'/nouns'}(page=${pageNo},size=${nounPage.size},word=${searchedWord})}"
+						                th:text="${pageNo + 1}">
+						            </a>
+						        </li>
+							<li th:class="${nounPage.number eq nounPage.totalPages-1} ? 'page-item disabled' : 'page-item'">
+					            <a class="page-link" th:if="${end le nounPage.totalPages}" th:href="@{${'/nouns'}(page=${nounPage.totalPages-1},size=${nounPage.size},word=${searchedWord})}" th:text="Last"></a>
+					            <a class="page-link" th:if="${not (end le nounPage.totalPages)}" href="javascript:void(0);" th:text="Last"></a>
+					        </li>
+							
+						    </ul>
+						</nav>
 
 						<hr>
 						<a th:href="@{/}">Home</a>
