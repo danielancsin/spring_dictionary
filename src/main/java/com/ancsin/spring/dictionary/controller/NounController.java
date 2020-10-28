@@ -1,7 +1,6 @@
 package com.ancsin.spring.dictionary.controller;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -102,14 +101,4 @@ public class NounController {
 		
 		return "redirect:/nouns";
 	}
-	
-    private PageRequest toPageRequest(Integer page, Integer size) {
-        if (page == null) {
-            page = Integer.valueOf(DEFAULT_PAGE);
-        }
-        if (size == null) {
-            size = Integer.valueOf(DEFAULT_PAGE_SIZE);
-        }
-        return PageRequest.of(page, size);
-    }
 }

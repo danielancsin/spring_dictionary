@@ -61,10 +61,10 @@ public class UserController {
 	
 	
 	@PostMapping("/save")
-	public String saveUser(@ModelAttribute("user") User theUser) {
+	public String saveUser(@ModelAttribute("user") User user) {
 		
 		// save the User
-		userService.save(theUser);
+		userService.save(user);
 		
 		// use a redirect to prevent duplicate submissions
 		return "redirect:/users";
@@ -81,7 +81,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/search")
-	public String search(@RequestParam("userName") String name, Model model) {
+	public String search(@RequestParam("name") String name, Model model) {
 		
 		// delete the User
 		List<User> users = userService.searchBy(name);
