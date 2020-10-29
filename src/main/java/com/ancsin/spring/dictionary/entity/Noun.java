@@ -17,7 +17,7 @@ import com.ancsin.spring.dictionary.entity.abstracts.WordEntity;
 @Entity
 @Table(	name = "noun", indexes = @Index(name = "ix_word", columnList = "word")
 		/*,uniqueConstraints = @UniqueConstraint(columnNames = {"username", "email"})*/)
-public class Noun extends WordEntity {
+public class Noun extends WordEntity<NounMeaning> {
 
 	@ManyToMany(fetch = FetchType.LAZY,
 			cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -25,17 +25,17 @@ public class Noun extends WordEntity {
 			joinColumns = @JoinColumn(name = "noun_id"),
 			inverseJoinColumns = @JoinColumn(name = "gender_id")
 			)
-	private List<EnumGenderGerman> genders;
-	
+	private List<GenderGerman> genders;
+
 	private String plural;
 	
-	@ManyToMany(fetch = FetchType.LAZY,
-			cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinTable( name = "noun_meaning",
-	joinColumns = @JoinColumn(name = "noun_id"),
-	inverseJoinColumns = @JoinColumn(name = "meaning_id")
-			)
-	private List<Meaning> meanings;
+//	@ManyToMany(fetch = FetchType.LAZY,
+//			cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.REFRESH})
+//	@JoinTable( name = "noun_meaning",
+//	joinColumns = @JoinColumn(name = "noun_id"),
+//	inverseJoinColumns = @JoinColumn(name = "meaning_id")
+//			)
+//	private List<AbstractMeaning> meanings;
 
 	public Noun() {
 		super();
@@ -46,15 +46,15 @@ public class Noun extends WordEntity {
 		this.plural = plural;
 	}
 
-	public List<EnumGenderGerman> getGenders() {
+	public List<GenderGerman> getGenders() {
 		return genders;
 	}
 
-	public void setGenders(List<EnumGenderGerman> genders) {
+	public void setGenders(List<GenderGerman> genders) {
 		this.genders = genders;
 	}
 	
-	public void addGender(EnumGenderGerman gender) {
+	public void addGender(GenderGerman gender) {
 		
 		if (genders == null)
 			genders = new ArrayList<>();
@@ -70,25 +70,25 @@ public class Noun extends WordEntity {
 		this.plural = plural;
 	}
 	
-	public List<Meaning> getMeanings() {
-		return meanings;
-	}
-
-	public void setMeanings(List<Meaning> meaning) {
-		this.meanings = meaning;
-	}
-	
-	public void addMeanings(Meaning meaning) {
-		
-		if (meanings == null)
-			meanings = new ArrayList<>();
-		
-		meanings.add(meaning);
-	}
+//	public List<AbstractMeaning> getMeanings() {
+//		return meanings;
+//	}
+//
+//	public void setMeanings(List<AbstractMeaning> meaning) {
+//		this.meanings = meaning;
+//	}
+//	
+//	public void addMeanings(AbstractMeaning meaning) {
+//		
+//		if (meanings == null)
+//			meanings = new ArrayList<>();
+//		
+//		meanings.add(meaning);
+//	}
 
 	@Override
 	public String toString() {
-		return "Noun [genders=" + genders + ", plural=" + plural + ", meanings=" + meanings + ", toString()="
+		return "Noun [gender=" + genders + ", plural=" + plural + /*", meanings=" + meanings + */", toString()="
 				+ super.toString() + "]";
 	}
 

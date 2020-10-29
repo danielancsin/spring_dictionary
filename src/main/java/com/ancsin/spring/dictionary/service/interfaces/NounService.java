@@ -9,10 +9,10 @@ import com.ancsin.spring.dictionary.entity.Noun;
 
 public interface NounService extends AbstractService<Noun> {
 
-	List<Noun> findAllPaginated(int page, int size);
-	
 	Page<Noun> findAllPaginated(Pageable pageable);
 
 	Page<Noun> findByWordContainsAllIgnoreCase(String word, Pageable pageable);
+
+	List<Noun> searchBy(String word);
 	
 }

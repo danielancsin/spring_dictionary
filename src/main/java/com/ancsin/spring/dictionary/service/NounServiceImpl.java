@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -26,23 +25,6 @@ public class NounServiceImpl implements NounService {
 	
 	@Override
 	public Page<Noun> findAllPaginated(Pageable pageable) {
-		
-//		int pageNo = pageable.getPageNumber();
-//		int pageSize = pageable.getPageSize();
-//		int startItem = pageNo * pageSize;
-//		
-//		List<Noun> list;
-//		List<Noun> nouns = nounRepository.findAll();///pageable).toList();
-//		
-//		if (nouns.size() < startItem) {
-//			list = Collections.emptyList();
-//		}
-//		else {
-//			int toIndex = Math.min(startItem + pageSize, nouns.size());
-//			list = nouns.subList(startItem, toIndex);
-//		}
-//		Page<Noun> nounPage = new PageImpl<Noun>(list, PageRequest.of(pageNo, pageSize), nouns.size());
-		
 		return nounRepository.findAll(pageable);
 	}
 	
@@ -51,15 +33,6 @@ public class NounServiceImpl implements NounService {
 		return nounRepository.findByWordContainsAllIgnoreCase(word, pageable);
 	}
 	
-	@Override
-	public List<Noun> findAllPaginated(int page, int size) {
-		
-		Pageable paging = PageRequest.of(page, size);
-		Page<Noun> pagedResults = nounRepository.findAll(paging);
-		
-		return pagedResults.toList();
-	}
-
 	@Override
 	public Noun findById(long id) {
 		
@@ -76,8 +49,8 @@ public class NounServiceImpl implements NounService {
 	}
 
 	@Override
-	public void save(Noun t) {
-		nounRepository.save(t);
+	public Noun save(Noun t) {
+		return nounRepository.save(t);
 	}
 
 	@Override

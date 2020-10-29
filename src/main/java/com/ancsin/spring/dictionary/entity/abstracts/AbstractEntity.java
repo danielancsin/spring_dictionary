@@ -11,6 +11,8 @@ public abstract class AbstractEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	private boolean deleted;
 
 	public AbstractEntity() {
 	}
@@ -22,9 +24,18 @@ public abstract class AbstractEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	@Override
 	public String toString() {
-		return "AbstractEntity [id=" + id + "]";
+		return "AbstractEntity [id=" + id + ", deleted=" + deleted + "]";
 	}
 
 }

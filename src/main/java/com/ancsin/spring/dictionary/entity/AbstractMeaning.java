@@ -1,15 +1,12 @@
 package com.ancsin.spring.dictionary.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
 
 import com.ancsin.spring.dictionary.entity.abstracts.AuditEntity;
 
-@Entity
-@Table(	/*schema = "german",*/
-		name = "meaning")
-public class Meaning extends AuditEntity {
+@MappedSuperclass
+public abstract class AbstractMeaning extends AuditEntity {
 	
 	private String note;
 	@Column(name = "is_public")
@@ -17,7 +14,7 @@ public class Meaning extends AuditEntity {
 	@Column(name = "is_approved")
 	private boolean isApproved;
 	
-	public Meaning() {
+	public AbstractMeaning() {
 		super();
 	}
 

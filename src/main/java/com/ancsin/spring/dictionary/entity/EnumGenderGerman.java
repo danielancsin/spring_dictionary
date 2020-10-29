@@ -1,33 +1,28 @@
 package com.ancsin.spring.dictionary.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.ancsin.spring.dictionary.converter.AbstractEnumConverter;
 
-// Lazy init
-@Entity
-public enum EnumGenderGerman {
+public enum EnumGenderGerman implements PersistableEnum<String> {
 	
-	DER(1,"der"),
-	DIE(2,"die"),
-	DAS(3,"das");
+	DER("der"),
+	DIE("die"),
+	DAS("das");
 
-	@Id
-	private final long id;
-	@Column
-	private final String name;
+	private final String value;
 	
-	private EnumGenderGerman(long id, String name) {
-		this.id = id;
-		this.name = name;
+	EnumGenderGerman(String value) {
+		this.value = value;
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
+	@Override
+	public String getValue() {
+		return value;
 	}
 	
+	public static class Converter extends AbstractEnumConverter<EnumGenderGerman, String> {
+        public Converter() {
+            super(EnumGenderGerman.class);
+        }
+    }
+
 }

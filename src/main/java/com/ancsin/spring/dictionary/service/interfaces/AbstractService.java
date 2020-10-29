@@ -8,10 +8,12 @@ public interface AbstractService<T> {
 	
 	public T findById(long id);
 	
-	public void save(T t);
+//	public void save(T t);
+	
+	public T save(T t);
 	
 	public void deleteById(long id);
-
+	
 	public List<T> searchBy(String name);
 
 }

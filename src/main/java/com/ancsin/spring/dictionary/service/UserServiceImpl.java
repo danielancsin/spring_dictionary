@@ -13,13 +13,9 @@ import com.ancsin.spring.dictionary.service.interfaces.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
+	@Autowired
 	private UserRepository userRepository;
 	
-	@Autowired
-	public UserServiceImpl(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
-
 	// TODO : user settings based pagination
 	@Override
 	public List<User> findAll() {
@@ -44,8 +40,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void save(User user) {
-		userRepository.save(user);
+	public User save(User user) {
+		return userRepository.save(user);
 	}
 
 	@Override

@@ -12,7 +12,7 @@ public interface NounRepository extends JpaRepository<Noun, Long> {
 
 	// TODO : add methods to queries
 	public List<Noun> findByWordContainsAllIgnoreCase(String word);
-
+	
 	public Page<Noun> findByWordContainsAllIgnoreCase(String word, Pageable pageable);
 
 }

@@ -31,7 +31,7 @@ public class NounController {
 	
 	// TODO : pagination, BUT huge performance impact on small (500k words) table. Optimze query, etc...
 	@GetMapping({"","/", "/search"})
-    public String listNounsPaginated(
+    public String listPaginated(
     		@PageableDefault(size = DEFAULT_PAGE_SIZE, page = DEFAULT_PAGE) Pageable pageable,
     		@RequestParam(required = false) String word,
     		Model model
@@ -83,7 +83,7 @@ public class NounController {
 	
 	
 	@PostMapping("/save")
-	public String saveNoun(@ModelAttribute("noun") Noun noun) {
+	public String save(@ModelAttribute("noun") Noun noun) {
 		
 		// save the Noun
 		nounService.save(noun);
