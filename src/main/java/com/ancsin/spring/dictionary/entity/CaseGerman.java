@@ -18,36 +18,36 @@ import javax.persistence.Table;
 import com.ancsin.spring.dictionary.entity.abstracts.AuditEntity;
 
 @Entity
-@Table(name = "gender_german")
-public class GenderGerman extends AuditEntity {
+@Table(name = "case_german")
+public class CaseGerman extends AuditEntity {
 
 	@Enumerated(EnumType.STRING)
-	@Column(length = 3)
-	@Convert(attributeName = "name", converter = EnumGenderGerman.Converter.class)
-	private EnumGenderGerman gender;
-
+	@Column(length = 10)
+	@Convert(attributeName = "value", converter = EnumCaseGerman.Converter.class)
+	private EnumCaseGerman caseGerman;
+	
 	@ManyToMany(fetch = FetchType.LAZY,
 			cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinTable( name = "noun_gender",
-			joinColumns = @JoinColumn(name = "gender_id"),
+	@JoinTable( name = "noun_case",
+			joinColumns = @JoinColumn(name = "case_id"),
 			inverseJoinColumns = @JoinColumn(name = "noun_id")
 			)
 	private List<Noun> nouns;
-	
-	public GenderGerman() {
+
+	public CaseGerman() {
 	}
 
-	public GenderGerman(EnumGenderGerman gender) {
+	public CaseGerman(EnumCaseGerman caseGerman) {
 		super();
-		this.gender = gender;
+		this.caseGerman = caseGerman;
 	}
 
-	public EnumGenderGerman getGender() {
-		return gender;
+	public EnumCaseGerman getCaseGerman() {
+		return caseGerman;
 	}
 
-	public void setGender(EnumGenderGerman gender) {
-		this.gender = gender;
+	public void setCaseGerman(EnumCaseGerman caseGerman) {
+		this.caseGerman = caseGerman;
 	}
 
 	public List<Noun> getNouns() {
@@ -57,9 +57,9 @@ public class GenderGerman extends AuditEntity {
 	public void setNouns(List<Noun> nouns) {
 		this.nouns = nouns;
 	}
-
+	
 	public void addNoun(Noun noun) {
-		if (nouns == null)
+		if (nouns == null) 
 			nouns = new ArrayList<>();
 		
 		nouns.add(noun);
@@ -67,7 +67,7 @@ public class GenderGerman extends AuditEntity {
 
 	@Override
 	public String toString() {
-		return "GenderGerman [gender=" + gender + ", nouns=" + nouns + ", super.toString()=" + super.toString() + "]";
+		return "CaseGerman [caseGerman=" + caseGerman + ", nouns=" + nouns + ", super.toString()=" + super.toString() + "]";
 	}
 	
 }

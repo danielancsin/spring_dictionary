@@ -1,34 +1,29 @@
 package com.ancsin.spring.dictionary.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.ancsin.spring.dictionary.converter.AbstractEnumConverter;
 
-// Lazy init
-@Entity
-public enum EnumCaseGerman {
+public enum EnumCaseGerman implements PersistableEnum<String> {
 	
-	NOM(1,"Nominative"),
-	ACC(2,"Accusative"),
-	DAT(3,"Dative"),
-	GEN(4,"Genitive");
+	NOM("Nominative"),
+	ACC("Accusative"),
+	DAT("Dative"),
+	GEN("Genitive");
 
-	@Id
-	private final long id;
-	@Column
-	private final String name;
+	private final String value;
+
+	EnumCaseGerman(String value) {
+		this.value = value;
+	}
+
+	@Override
+	public String getValue() {
+		return value;
+	}
 	
-	private EnumCaseGerman(long id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
+	public static class Converter extends AbstractEnumConverter<EnumCaseGerman, String> {
+        public Converter() {
+            super(EnumCaseGerman.class);
+        }
+    }
 	
 }

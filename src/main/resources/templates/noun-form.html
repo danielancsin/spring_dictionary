@@ -22,9 +22,10 @@
 							<!-- Add hidden form field to handle update -->
 							<input type="hidden" th:field="*{id}" /> 
 							
-							<input type="text" th:field="*{genders}" class="form-control mb-4 col-4" placeholder="Gender">
+							<input type="text" th:field="*{genders}" class="form-control mb-4 col-4" placeholder="Genders">
 							<input type="text" th:field="*{word}" class="form-control mb-4 col-4" placeholder="Word"> 
 							<input type="text" th:field="*{plural}" class="form-control mb-4 col-4" placeholder="Plural">
+							<input type="text" th:field="*{meanings}" class="form-control mb-4 col-4" placeholder="Meanings">
 
 							<button type="submit" class="btn btn-info col-2">Save</button>
 							<a  th:href="@{/nouns/}" href="/nouns" class="btn btn-secondary col-2">Cancel</a>

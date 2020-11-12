@@ -29,6 +29,11 @@ public class Noun extends WordEntity<NounMeaning> {
 
 	private String plural;
 	
+	private String prexif;
+	
+	// ENUM
+	private String germanCase;
+	
 //	@ManyToMany(fetch = FetchType.LAZY,
 //			cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.REFRESH})
 //	@JoinTable( name = "noun_meaning",
